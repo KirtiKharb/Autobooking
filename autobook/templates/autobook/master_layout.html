@@ -1,0 +1,16 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+
+    {% block head %}
+        {% include "autobook/head_layout.html" %}
+    {% endblock %}
+
+<body id="page-top">
+    {% block content %}{% endblock %}
+    {% block foot %}
+        {% include "autobook/foot_layout.html" %}
+    {% endblock %}
+    {% block js %}{% endblock %}
+</body>
+</html>

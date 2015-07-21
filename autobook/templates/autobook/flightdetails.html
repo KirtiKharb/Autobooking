@@ -1,0 +1,27 @@
+{% extends "autobook/master_layout.html" %}
+
+{% load staticfiles %}
+
+{% block content %}
+<div class="container">
+<div class="row">&nbsp;</div>
+<div class="row">&nbsp;</div>
+<div class="row">
+<div class="col-lg-12 col-md-12 col-sm-12 well">
+<table class='table table-striped' id="mytext">
+<thead>
+	<tr>
+		<th>Flight id</th><th>Source</th><th>Destination</th><th>Airline</th><th>Arrival at</th><th>Departure at</th><th>Travel type</th>
+	</tr>
+</thead>
+<tbody>
+	<tr>
+		<td>{{flight.flight_id}}</td><td>{{flight.source}}</td><td>{{flight.destination}}</td><td>{{flight.airline}}</td><td>{{flight.arrival_at}}</td><td>{{flight.departure_at}}</td><td>{{flight.travel_type}}</td>
+	</tr>
+</tbody>	
+</table>
+</div>
+</div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,184 @@
+{% extends "autobook/master_layout.html" %}
+
+{% load staticfiles %}
+
+{% block content %}
+
+<div class="container">
+	<div class="row">&nbsp;</div>
+	<div class="row">&nbsp;</div>
+	<div class="row">
+		<div class="col-lg-8 col-md-8 col-lg-offset-2 col-md-offset-2 well">
+			<form class="form"  id="flight-search" name="flight-search">
+			    {% csrf_token %}
+				<div class="row">
+					<div class="col-lg-5 col-lg-offset-1">
+						<div class="input-group ui-widget">
+							<span class="input-group-addon" >From:</span>
+							<input type="text" id="basic-addon1" class="form-control source-autocomplete"placeholder="New Delhi (DEL), India" aria-describedby="basic-addon1">
+						</div>
+					</div>
+					<div class="col-lg-5">    
+						<div class="input-group ui-widget">
+							<span class="input-group-addon" >To:</span>
+							<input type="text" id="basic-addon2" class="form-control source-autocomplete" placeholder="Bangalore (BLR), India" aria-describedby="basic-addon2">
+						</div>
+					</div> 
+					<br><br><br>
+					<div class="col-lg-4 col-lg-offset-1">
+                    <span >Depart:</span>
+						<div class="form-group">
+							<div class='input-group'>
+								<span class="input-group-addon">
+									<span class="glyphicon glyphicon-calendar"></span>
+								</span>
+								<input type='text' id="date" class="form-control datetimepicker" value="" />
+								
+							</div>
+						</div>  
+					</div>
+					<div class="col-lg-3">
+						<span >No. Of Travellers:</span>
+						<div class="input-group">
+							<span class="input-group-addon">
+								<span class="glyphicon glyphicon-user"></span>
+							</span>
+							<select id="travel_no" class="form-control selectLarge width100" tabindex="8">
+								<option value="1">1</option>
+								<option value="2">2</option>
+							</select>
+						</div>
+					</div> 
+					<div class="col-lg-3 ">
+						<span >Class:</span>
+						<select id="travel_class1"  class="form-control selectLarge width100" tabindex="8">
+							<option value="E">Economy</option>
+							<option value="B">Business</option>
+							<option value="F">First Class</option>
+						</select>  
+					</div> 
+					<div class="col-lg-12"></div>
+					<div class="col-lg-4 col-lg-offset-5">
+						<button class="btn btn-info" value="submit" id="submit">Search Flights</button>
+					</div>
+				</div>  
+			</form>
+		</div>
+	</div>
+		<div class="row">
+				<div class="col-lg-8 col-md-8 col-lg-offset-2 col-md-offset-2 ">
+				<div class="alert alert-info text-center" role="alert"><b>For cheaper flights in future </b><a  href='#' class="btn btn-default" id="button2" data-toggle="modal" data-target="#myModal1"><u>click here</u></a> !</div>
+				</div>
+				</div>
+			
+
+	<div class="row">&nbsp;</div>
+	<div class="row">&nbsp;</div>
+
+    <div class="row">
+		<table class='table table-striped' id="mytext"></table>
+	</div>
+</div>
+
+<div class="modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Enter details</h4>
+      </div>
+      <div class="modal-body">
+        <form id="box">
+            {% csrf_token %}
+	        <div class="row">
+				<div class="col-lg-5 col-lg-offset-1">
+	            <div class="input-group ui-widget">
+					<span class="input-group-addon" >From:</span>
+					<input type="text" id="source" name="source" class="form-control source-autocomplete"  aria-describedby="basic-addon3">
+				</div>
+				</div>
+				<div class="col-lg-5"> 
+				<div class="input-group ui-widget">
+					<span class="input-group-addon" >To:</span>
+					<input type="text" id="destination" name="destination" class="form-control source-autocomplete"  aria-describedby="basic-addon4">
+				</div>
+				</div>
+			</div>
+			<div class="row">&nbsp;</div>
+			<div class="row">
+				<div class="col-lg-4 col-lg-offset-1">
+	                <span >Depart:</span>
+					<div class="form-group">
+						<div class='input-group'>
+							<span class="input-group-addon">
+								<span class="glyphicon glyphicon-calendar"></span>
+							</span>
+							<input type='text' id="date_of_flight" name="date_of_flight"  class="form-control datetimepicker" value="" />
+						</div>
+					</div>  
+				</div>
+				<div class="col-lg-3">
+					<span >No. Of Travellers:</span>
+					<div class="input-group">
+						<span class="input-group-addon">
+							<span class="glyphicon glyphicon-user"></span>
+						</span>
+						<select id="number_of_passengers" name="number_of_passengers" class="form-control selectLarge width100" tabindex="8">
+							<option value="1">1</option>
+							<option value="2">2</option>
+						</select>
+					</div>
+				</div> 
+				<div class="col-lg-3 ">
+					<span >Class:</span>
+					<select id="travel_class" name="travel_class" class="form-control selectLarge width100" tabindex="8">
+						<option value="E">Economy</option>
+						<option value="B">Business</option>
+						<option value="F">First Class</option>
+					</select>  
+				</div>
+			</div>	
+			<div class="row">
+				<div class="col-lg-10 col-lg-offset-1">
+	                <span >Price Range:</span>
+	            </div>    
+				<div class="form-group col-lg-5 col-lg-offset-1"> 
+					<div class="input-group ui-widget">
+						<span class="input-group-addon" >Lower limit:</span>
+						<input type="text" id="minimum_price" name="minimum_price" class="form-control"  aria-describedby="min-price">
+					</div>
+				</div>
+				<div class="form-group col-lg-5"> 
+					<div class="input-group ui-widget">
+						<span class="input-group-addon" >Upper limit:</span>
+					    <input type="text" id="maximum_price" name="maximum_price" class="form-control"  aria-describedby="max-price">
+					</div>
+				</div>
+			</div>	
+			<div class="row">
+				<div class="col-lg-8 col-lg-offset-1"> 
+					<span >Email ID:</span>
+					<div class="form-group">
+						<div class="input-group">
+							<span class="input-group-addon">
+								<span class="glyphicon glyphicon-envelope"></span>
+							</span>
+							<input type="text" id="user_email" name="user_email" class="form-control"  aria-describedby="email">
+						</div>	
+					</div>
+				</div>
+				<div class="col-lg-6 col-lg-offset-5 " >
+	            	<button class='btn btn-success' type='button' id='button4' data-dismiss="modal">Submit</button>
+	        	</div>
+	        </div>
+	        <div class="row">&nbsp;</div>	    
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}
